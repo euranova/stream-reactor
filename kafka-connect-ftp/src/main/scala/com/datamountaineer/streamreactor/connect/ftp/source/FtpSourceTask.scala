@@ -113,9 +113,10 @@ class FtpSourceTask extends SourceTask with StrictLogging {
     logger.info("start")
     logger.info(manifest.printManifest())
 
-    val conf = if (context.configs().isEmpty) props else context.configs()
+    // Commented as the current verison of the kafka API contain the config, but the 1.1.0 does not.
+    //val conf = if (context.configs().isEmpty) props else context.configs()
 
-    val sourceConfig = new FtpSourceConfig(conf)
+    val sourceConfig = new FtpSourceConfig(props)
 
     sourceConfig.ftpMonitorConfigs.foreach(cfg => {
       logger.info(s"config tells us to track the ${cfg.mode.toString} of files in `${cfg.path}` to topic `${cfg.topic}")
